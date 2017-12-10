@@ -9,7 +9,7 @@ import os
 import time
 from urllib2 import urlopen
 
-BOOTSTRAP_URL = "https://mega.nz/#!8qZ0EZ4L!3opQ7VlNkcTC_syuLLTHUTdYmjZKJ1cnTxcWVZZkX8Y"
+BOOTSTRAP_URL = "https://mega.nz/#!8qZ0EZ4L!3opQ7VlNkcTC_syuLLTHUTdYmjZKJ1cnTxcWVZZkX8Y" #TODO
 SENTINEL_GIT_URL = "https://github.com/terracoin/sentinel.git"
 
 MN_USERNAME = "mn1"
@@ -134,6 +134,8 @@ def setup_wallet():
         f.write(line)
         f.close()
 
+    print_info("Installing useful programs...")
+    run_command("apt-get -y --assume-yes install git unzip iptables ")
     print_info("Installing wallet dependencies...")
     run_command("apt-get -y install software-properties-common")
     run_command("add-apt-repository ppa:bitcoin/bitcoin -y")
@@ -151,6 +153,8 @@ def setup_wallet():
 
 def setup_masternode():
     print_info("Setting up masternode...")
+    MN_USERNAME = raw_input("alias: ")
+    SERVER_IP = raw_input("IP to use: ")
     run_command("useradd --create-home -G sudo {}".format(MN_USERNAME))
     
     print_info("Open your desktop wallet config file (%appdata%/{}/{}) and copy\n    your rpc username and password! If it is not there create one! E.g.:\n\trpcuser=[SomeUserName]\n\trpcpassword=[DifficultAndLongPassword]".format(MN_WFOLDER, MN_CONFIGFILE))
@@ -185,7 +189,7 @@ masternodeprivkey={}
     with open('/home/{}/{}/{}'.format(MN_USERNAME, MN_LFOLDER, MN_CONFIGFILE), 'w') as f:
         f.write(config)
         
-    print_info("Downloading blockchain file...")
+    print_info("Downloading blockchain file...")#TODO
     run_command("apt-get --assume-yes install megatools")
     filename = "blockchain.rar"
     run_command_as(MN_USERNAME, "cd && megadl '{}' --path {}".format(BOOTSTRAP_URL, filename))
@@ -232,14 +236,14 @@ def setup_sentinel():
     job = "* * * * * cd /home/{}/{}/sentinel && SENTINEL_DEBUG=1 ./venv/bin/python bin/sentinel.py >> sentinel.log 2>&1".format(MN_USERNAME, MN_LFOLDER)
     crontab(job)
 
-    # try to update sentinel every day
-    job = "* * 1 * * cd /home/{}/{}/sentinel && git pull https://github.com/terracoin/sentinel.git".format(MN_USERNAME, MN_LFOLDER)
+    # try to update sentinel every week
+    job = "* * 7 * * cd /home/{}/{}/sentinel && git pull https://github.com/terracoin/sentinel.git".format(MN_USERNAME, MN_LFOLDER)
     crontab(job)
     
 def end():
 
     mn_base_data = """
-    Alias: Masternode1
+    Alias: {}
     IP: {}
     Private key: {}
     Transaction ID: [The transaction id of the desposit. 'masternode outputs']
@@ -247,7 +251,7 @@ def end():
     --------------------------------------------------
 """
 
-    mn_data = mn_base_data.format(SERVER_IP + ":" + str(MN_PORT), PRIVATE_KEY)
+    mn_data = mn_base_data.format(MN_USERNAME,SERVER_IP + ":" + str(MN_PORT), PRIVATE_KEY)
 
     imp = R"""Vs lbh sbhaq gur thvqr naq guvf fpevcg hfrshy pbafvqre gb fhccbeg zr.\a    GEP: 1Yl4vDuWeRPsjLpz8Ac4gQHZLbQZuO1Qao\a    RGU: 0k9n794240o456O8qQ5593n7r8q7NR92s4pn4Q9Q2s\a    OGP: 33PeQClZcpjWSlZGprIZGYWLYE8mOFfaJz\a\a"""
 
@@ -262,7 +266,7 @@ def end():
 
 Masternode data:""".format(MN_USERNAME, MN_CLI, MN_EXPLORER) + mn_data)
 
-    print_warning(imp.decode('rot13').decode('unicode-escape'))
+    print_warning("hi")
 
 def main():
     print_welcome()
