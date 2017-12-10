@@ -135,7 +135,7 @@ def setup_wallet():
         f.close()
 
     print_info("Installing useful programs...")
-    run_command("apt-get -y --assume-yes install git unzip iptables ")
+    run_command("apt-get -y --assume-yes install git unzip iptables htop nano ")
     print_info("Installing wallet dependencies...")
     run_command("apt-get -y install software-properties-common")
     run_command("add-apt-repository ppa:bitcoin/bitcoin -y")
