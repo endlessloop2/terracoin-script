@@ -12,7 +12,7 @@ from urllib2 import urlopen
 BOOTSTRAP_URL = "https://mega.nz/#!8qZ0EZ4L!3opQ7VlNkcTC_syuLLTHUTdYmjZKJ1cnTxcWVZZkX8Y" #TODO
 SENTINEL_GIT_URL = "https://github.com/terracoin/sentinel.git"
 
-MN_USERNAME = "mn1"
+MN_USERNAME = ""
 MN_PORT = 13333
 MN_RPCPORT = 22350
 MN_NODELIST = ""
@@ -153,7 +153,9 @@ def setup_wallet():
 
 def setup_masternode():
     print_info("Setting up masternode...")
-    MN_USERNAME = raw_input("alias: ")
+    masternode_alias = raw_input("alias: ")
+    global MN_USERNAME
+    MN_USERNAME = masternode_alias
     SERVER_IP = raw_input("IP to use: ")
     run_command("useradd --create-home -G sudo {}".format(MN_USERNAME))
     
