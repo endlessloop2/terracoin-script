@@ -248,14 +248,12 @@ def end():
     Alias: {}
     IP: {}
     Private key: {}
-    Transaction ID: [The transaction id of the desposit. 'masternode outputs']
-    Transaction index: [The transaction index of the desposit. 'masternode outputs']
+    Transaction ID: [The transaction id of the deposit. 'masternode outputs']
+    Transaction index: [The transaction index of the deposit. 'masternode outputs']
     --------------------------------------------------
 """
 
     mn_data = mn_base_data.format(MN_USERNAME,SERVER_IP + ":" + str(MN_PORT), PRIVATE_KEY)
-
-    imp = R"""Vs lbh sbhaq gur thvqr naq guvf fpevcg hfrshy pbafvqre gb fhccbeg zr.\a    GEP: 1Yl4vDuWeRPsjLpz8Ac4gQHZLbQZuO1Qao\a    RGU: 0k9n794240o456O8qQ5593n7r8q7NR92s4pn4Q9Q2s\a    OGP: 33PeQClZcpjWSlZGprIZGYWLYE8mOFfaJz\a\a"""
 
     print('')
     print_info(
