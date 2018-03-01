@@ -135,7 +135,7 @@ def setup_wallet():
         f.close()
 
     print_info("Installing useful programs...")
-    run_command("apt-get -y --assume-yes install git unzip iptables htop nano ")
+    run_command("apt-get -y --assume-yes install git unzip iptables htop nano")
     print_info("Installing wallet dependencies...")
     run_command("apt-get -y install software-properties-common")
     run_command("add-apt-repository ppa:bitcoin/bitcoin -y")
@@ -146,9 +146,9 @@ def setup_wallet():
                 "libboost-system1.58.0 libboost-thread1.58.0 libevent-2.0-5 libzmq5 libboost-chrono1.58.0")
 
     print_info("Downloading wallet...")
-    run_command("wget https://github.com/terracoin/terracoin/releases/download/0.12.1.5p/terracoind -O /usr/local/bin/{}".format(MN_DAEMON))
+    run_command("wget https://github.com/terracoin/terracoin/releases/download/0.12.1.8/terracoind -O /usr/local/bin/{}".format(MN_DAEMON))
     run_command("chmod +x /usr/local/bin/{}".format(MN_DAEMON))
-    run_command("wget https://github.com/terracoin/terracoin/releases/download/0.12.1.5p/terracoin-cli -O /usr/local/bin/{}".format(MN_CLI))
+    run_command("wget https://github.com/terracoin/terracoin/releases/download/0.12.1.8/terracoin-cli -O /usr/local/bin/{}".format(MN_CLI))
     run_command("chmod +x /usr/local/bin/{}".format(MN_CLI))
 
 def setup_masternode():
