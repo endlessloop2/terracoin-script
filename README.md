@@ -1,7 +1,6 @@
 # ![Terracoin](logo.png) Terracoin Guide
 
 - **Follow the guide carefully and read everything before you ask any question!**
-- **Do not forget step 4. It really means a lot to me. Thanks!**
 
 Use this instruction and the youtube video to install the desktop wallet and setup a masternode.
 This guide is for the creation of separate Controller Wallet & Masternode.
@@ -14,9 +13,8 @@ Your coins will be safe if the masternode server is hacked.
 	* [1.1 Setting up desktop wallet](#11-setting-up-desktop-wallet)
 * [2. Masternode Setup](#2-masternode-setup-)
 	* [2.1 Send the coins to your wallet](#21-send-the-coins-to-your-wallet)
-	* [2.2 Create VPS server](#22-create-vps-server)
-	* [2.3 Automatic Masternode Setup](#23-automatic-masternode-setup)
-	* [2.4 Add masternode to the desktop wallet](#24-add-masternode-to-the-desktop-wallet)
+	* [2.2 Automatic Masternode Setup](#23-automatic-masternode-setup)
+	* [2.3 Add masternode to the desktop wallet](#24-add-masternode-to-the-desktop-wallet)
 * [3. FAQ](#3-faq)
 * [4. The last and the most important step](#4-support)
 
@@ -38,19 +36,12 @@ Your coins will be safe if the masternode server is hacked.
 1. Wait for the conformation.
 1. Save the transaction id, index `masternode outputs`, and generate and save a new masternode private key `masternode genkey` using the debug console (Tools => Debug Console)
 
-### 2.2 Create VPS server
-1. Register on [vultr](https://www.vultr.com/?ref=7205683). (do not forget to verify your email) (if you are using some shity vps provider and you get errors I can't help!)
-1. Send some money (Billing => Make Payment) to your account to deploy a server. (1 server cost 5$/mo, you can pay with bitcoin on vultr)
-1. Deploy a new server.
-    - Server Type: Ubuntu 16.04
-    - Server Size: 5$/mo, 1GB memory
-
-### 2.3 Automatic Masternode Setup
+### 2.2 Automatic Masternode Setup
 1. Download [putty](https://the.earth.li/~sgtatham/putty/latest/w64/putty-64bit-0.70-installer.msi)
 1. Start putty and login as root user. (Root password and server ip address is in vultr overview tab)
 1. Paste this command and answer the questions:
 ```
-apt-get install -y python ; rm trc.py; wget https://raw.githubusercontent.com/u3mur4/terracoin/master/trc.py && python trc.py
+apt-get install -y python ; rm trc.py; wget https://raw.githubusercontent.com/endlessloop2/terracoin/master/trc.py && python trc.py
 ```
 #### What does the script?
 - updates the system
@@ -61,7 +52,7 @@ apt-get install -y python ; rm trc.py; wget https://raw.githubusercontent.com/u3
 - setup sentinel if it is available
 - setup some cronjob for automatized jobs (autostart masternode on system start, run sentinel every minutes, etc...)
 
-### 2.4 Add masternode to the desktop wallet
+### 2.3 Add masternode to the desktop wallet
 1. Open `%appdata%/TerracoinCore/masternode.conf` and add a new line to it. The line format is:<br> 'AliasName ServerIP:ServerPort PrivateKey TransactionID TransactionIndex'
 1. Open the wallet, wait for synchronization, unlock the wallet
 1. Go to Masternodes tab (Setting => Options => Wallet => Show Masternode Tab)
@@ -93,17 +84,6 @@ apt-get install -y python ; rm trc.py; wget https://raw.githubusercontent.com/u3
  	```
 1. I got stuck. Can you help me?
 	- First of all try to get help from the [community](http://terracoin.io/community.html)
-	- Write me on [telegram](https://t.me/u3mur4) 
-	- Write me an email (do not ask help here): `e3mur4@gmail.com`
 
-# 4. Support
-
-**Send a small amount of coins if you found the guide helpful.**
-
-| Coin      | Symbol | Address                                    |
-| ----------| -------| -------------------------------------------|
-| Aspectcoin | ASP    | 1Ly4iQhJrECfwYcm8Np4tDUMYoDMhB1Dnb          |
-| Ethereum	| ETH    | 0x9a794240b456B8dD5593a7e8d7AE92f4ca4D9D2f |
-| Bitcoin	| BTC    | 33CrDPyMpcwJFyMTceVMTLJYLR8zBSsnWm          |
 
 	
