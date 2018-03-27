@@ -172,6 +172,7 @@ def setup_masternode():
 rpcpassword={}
 rpcallowip=127.0.0.1
 rpcport={}
+bind={}
 port={}
 server=1
 listen=1
@@ -181,7 +182,7 @@ mnconflock=1
 masternode=1
 externalip={}:{}
 masternodeprivkey={}
-{}""".format(rpc_username, rpc_password, MN_RPCPORT, MN_PORT, SERVER_IP, MN_PORT, masternode_priv_key, MN_NODELIST)
+{}""".format(rpc_username, rpc_password, MN_RPCPORT, SERVER_IP, MN_PORT, SERVER_IP, MN_PORT, masternode_priv_key, MN_NODELIST)
 
     # creates folder structure
     run_command_as(MN_USERNAME, "mkdir -p /home/{}/{}/".format(MN_USERNAME, MN_LFOLDER))
