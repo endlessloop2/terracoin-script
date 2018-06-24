@@ -121,18 +121,18 @@ def secure_server():
     run_command("ufw --force enable")
 
 def setup_wallet():
-    print_info("Allocating swap...")
-    run_command("fallocate -l {} /swapfile".format(MN_SWAPSIZE))
-    run_command("chmod 600 /swapfile")
-    run_command("mkswap /swapfile")
-    run_command("swapon /swapfile")
+    #print_info("Allocating swap...")
+    #run_command("fallocate -l {} /swapfile".format(MN_SWAPSIZE))
+    #run_command("chmod 600 /swapfile")
+    #run_command("mkswap /swapfile")
+    #run_command("swapon /swapfile")
 
-    f = open('/etc/fstab','r+b')
-    line = '/swapfile   none    swap    sw    0   0 \n'
-    lines = f.readlines()
-    if (lines[-1] != line):
-        f.write(line)
-        f.close()
+   # f = open('/etc/fstab','r+b')
+   # line = '/swapfile   none    swap    sw    0   0 \n'
+   # lines = f.readlines()
+   # if (lines[-1] != line):
+   #     f.write(line)
+   #     f.close()
 
     print_info("Installing useful programs...")
     run_command("apt-get -y --assume-yes install git unzip iptables htop nano")
