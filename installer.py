@@ -157,6 +157,7 @@ def setup_masternode():
     global MN_USERNAME
     MN_USERNAME = masternode_alias
     SERVER_IP = raw_input("IP to use: ")
+    MN_RPCPORT = raw_input("RPC port: ")
     run_command("useradd --create-home -G sudo {}".format(MN_USERNAME))
     
     print_info("Open your desktop wallet config file (%appdata%/{}/{}) and copy\n    your rpc username and password! If it is not there create one! E.g.:\n\trpcuser=[SomeUserName]\n\trpcpassword=[DifficultAndLongPassword]".format(MN_WFOLDER, MN_CONFIGFILE))
