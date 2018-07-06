@@ -23,7 +23,7 @@ MN_CONFIGFILE = "terracoin.conf"
 MN_DAEMON = "terracoind"
 MN_CLI = "terracoin-cli"
 MN_EXPLORER = "https://explorer.terracoin.io/"
-MASTERNODES = 
+MASTERNODES = ""
 
 SERVER_IP = urlopen('http://ip.42.pl/raw').read()
 DEFAULT_COLOR = "\x1b[0m"
