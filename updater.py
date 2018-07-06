@@ -113,6 +113,7 @@ def check_root():
         sys.exit(-1)
 
 def get_masternodes():
+  print_info("Searching for masternode installations..")
   global MASTERNODES
   MASTERNODES = awk("ps auxwww | grep terracoind | grep -v grep | grep -v testnet | awk {'print $1'}")
   for m in MASTERNODES:
@@ -144,6 +145,7 @@ def end():
 
 def main():
     print_welcome()
+    check_root()
     update_wallet()
     get_masternodes()
     update_sentinel()
