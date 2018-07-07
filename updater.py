@@ -109,7 +109,7 @@ def get_masternodes():
   global MASTERNODES
   MASTERNODES = awk("ps auxwww | grep terracoind | grep -v grep | grep -v testnet | awk {'print $1'}")
   for m in MASTERNODES:
-    print_info("Updating masternode "+ m)    
+    print_info("Updating masternodes "+ m)    
     restart_masternode(m)
     
 
