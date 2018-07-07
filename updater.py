@@ -7,6 +7,7 @@ import time
 import math
 import os
 import time
+import bash
 from urllib2 import urlopen
 
 BOOTSTRAP_URL = "https://mega.nz/#!8qZ0EZ4L!3opQ7VlNkcTC_syuLLTHUTdYmjZKJ1cnTxcWVZZkX8Y" #TODO
@@ -87,18 +88,9 @@ def run_command(command):
     remove_lines(lines) 
     out.wait()
 def awk(command):
-    out = Popen(command, stderr=STDOUT, stdout=PIPE, shell=True)
-    lines = []
-    
-    while True:
-        line = out.stdout.readline()
-        if (line == ""):
-            break      
-        #lines.append(line.strip().encode('string_escape')[:w-3] + "\n")
-        #for l in lines:
-
-    out.wait()
-    return lines
+    awk = bash(command)
+    print_info(awk.stdout) 
+    return awk.stdout
 
 def print_welcome():
     os.system('clear')
@@ -117,7 +109,7 @@ def get_masternodes():
   global MASTERNODES
   MASTERNODES = awk("ps auxwww | grep terracoind | grep -v grep | grep -v testnet | awk {'print $1'}")
   for m in MASTERNODES:
-    print_info("Masternode found" + m)
+    print_info("Updating masternode "+ m)    
     restart_masternode(m)
     
 
@@ -134,22 +126,7 @@ def restart_masternode(mn_user):
     print_warning("Masternode started reindexing...")
     
 
-def update_sentinel():
-    # no sentinel support
-    if SENTINEL_GIT_URL == "":
-        return
-    
-    print_warning("Not implemented yet")
-def end():
-    print_warning("Not implemented yet")
-
 def main():
-    print_welcome()
-    check_root()
-    update_wallet()
-    get_masternodes()
-    update_sentinel()
-    end()
 
 if __name__ == "__main__":
     main()
