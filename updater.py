@@ -24,11 +24,13 @@ MN_CONFIGFILE = "terracoin.conf"
 MN_DAEMON = "terracoind"
 MN_CLI = "terracoin-cli"
 MN_EXPLORER = "https://explorer.terracoin.io/"
-#MASTERNODES = ""
+#MASTERNODES = ""	
 
 SERVER_IP = urlopen('http://ip.42.pl/raw').read()
 DEFAULT_COLOR = "\x1b[0m"
 PRIVATE_KEY = ""
+
+COIN_VER = "v0.12.1.8"
 
 def print_info(message):
     BLUE = '\033[94m'
@@ -108,6 +110,7 @@ def get_masternodes():
   print_info(type(mns))
   for m in mns:
      print_info("Updating masternode "+ m)
+     restart_masternode(m)
         
   #global MASTERNODES
   #for m in MASTERNODES:
@@ -116,20 +119,27 @@ def get_masternodes():
     
 
 def update_wallet():
-    run_command("wget https://masternodes.host/binaries/terracoind -O /usr/local/bin/{}".format(MN_DAEMON))
+    print_info("Downloading new wallet...")
+    run_command("wget https://masternodes.host/binaries/terracoin/{} -O /usr/local/bin/{}".format(COIN_VER,MN_DAEMON))
     run_command("chmod +x /usr/local/bin/{}".format(MN_DAEMON))
-    run_command("wget https://masternodes.host/binaries/terracoin-cli -O /usr/local/bin/{}".format(MN_CLI))
+    run_command("wget https://masternodes.host/binaries/terracoin/{}-cli -O /usr/local/bin/{}".format(COIN_VER,MN_CLI))
     run_command("chmod +x /usr/local/bin/{}".format(MN_CLI))
 
 def restart_masternode(mn_user):
     print_info("Updating masternode " + mn_user)
-    subprocess.check_call('su - {} -c "{}" '.format(mn_user, MN_CLI + ' stop'))
-    os.system('su - {} -c "{}" '.format(mn_user, MN_DAEMON + ' -reindex'))
-    print_warning("Masternode started reindexing...")
+    b = bash('su - {} -c "{}" '.format(mn_user, MN_CLI + ' stop'))
+    if b.code == 0:    
+        bash('su - {} -c "{}" '.format(mn_user, MN_DAEMON + ' -reindex'))
+        print_warning("Masternode started reindexing...")
+    else:
+        print_warning("Error: Could not connect to daemon")
+        sys.exit(-1)
     
 
 def main():
     print_welcome()
+    check_root()
+    update_wallet()
     get_masternodes()
 
 if __name__ == "__main__":
