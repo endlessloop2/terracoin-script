@@ -103,8 +103,12 @@ def check_root():
 def get_masternodes():
   print_info("Searching for masternode installations..")
   awk = bash("ps auxwww | grep terracoind | grep -v grep | grep -v testnet | awk {'print $1'}")
-  print_info(awk.stdout) 
-  print_info(type(awk.stdout))   
+  mns = awk.stdout.splitlines()
+  print_info(mns) 
+  print_info(type(mns))
+  for m in mns:
+     print_info("Updating masternode "+ m)
+        
   #global MASTERNODES
   #for m in MASTERNODES:
   #  print_info("Updating masternodes "+ m)    
