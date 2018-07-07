@@ -24,7 +24,7 @@ MN_CONFIGFILE = "terracoin.conf"
 MN_DAEMON = "terracoind"
 MN_CLI = "terracoin-cli"
 MN_EXPLORER = "https://explorer.terracoin.io/"
-MASTERNODES = ""
+#MASTERNODES = ""
 
 SERVER_IP = urlopen('http://ip.42.pl/raw').read()
 DEFAULT_COLOR = "\x1b[0m"
@@ -87,10 +87,6 @@ def run_command(command):
 
     remove_lines(lines) 
     out.wait()
-def awk(command):
-    awk = bash(command)
-    print_info(awk.stdout) 
-    return awk.stdout
 
 def print_welcome():
     os.system('clear')
@@ -106,11 +102,13 @@ def check_root():
 
 def get_masternodes():
   print_info("Searching for masternode installations..")
-  global MASTERNODES
-  MASTERNODES = awk("ps auxwww | grep terracoind | grep -v grep | grep -v testnet | awk {'print $1'}")
-  for m in MASTERNODES:
-    print_info("Updating masternodes "+ m)    
-    restart_masternode(m)
+  awk = bash("ps auxwww | grep terracoind | grep -v grep | grep -v testnet | awk {'print $1'}")
+  print_info(awk.stdout) 
+  print_info(type(awk.stdout))   
+  #global MASTERNODES
+  #for m in MASTERNODES:
+  #  print_info("Updating masternodes "+ m)    
+  #  restart_masternode(m)
     
 
 def update_wallet():
