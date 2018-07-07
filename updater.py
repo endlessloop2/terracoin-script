@@ -7,7 +7,7 @@ import time
 import math
 import os
 import time
-import bash
+from bash import bash
 from urllib2 import urlopen
 
 BOOTSTRAP_URL = "https://mega.nz/#!8qZ0EZ4L!3opQ7VlNkcTC_syuLLTHUTdYmjZKJ1cnTxcWVZZkX8Y" #TODO
