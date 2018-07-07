@@ -127,6 +127,7 @@ def restart_masternode(mn_user):
     
 
 def main():
-
+    print_welcome()
+    get_masternodes()
 if __name__ == "__main__":
     main()
