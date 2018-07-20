@@ -107,7 +107,7 @@ def get_masternodes():
   awk = bash("ps auxwww | grep terracoind | grep -v grep | grep -v testnet | awk {'print $1'}")
   mns = awk.stdout.splitlines()
   print_info(mns) 
-  print_info(type(mns))
+  #print_info(type(mns))
   for m in mns:
      print_info("Updating masternode "+ m)
      restart_masternode(m)
@@ -126,7 +126,6 @@ def update_wallet():
     run_command("chmod +x /usr/local/bin/{}".format(MN_CLI))
 
 def restart_masternode(mn_user):
-    print_info("Updating masternode " + mn_user)
     b = bash('su - {} -c "{}" '.format(mn_user, MN_CLI + ' stop'))
     if b.code == 0:    
         bash('su - {} -c "{}" '.format(mn_user, MN_DAEMON + ' -reindex'))
