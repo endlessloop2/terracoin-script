@@ -127,8 +127,10 @@ def update_wallet():
 
 def restart_masternode(mn_user):
     b = bash('su - {} -c "{}" '.format(mn_user, MN_CLI + ' stop'))
+    print(b.stdout)
     if b.code == 0:    
-        bash('su - {} -c "{}" '.format(mn_user, MN_DAEMON + ''))
+        b2 = bash('su - {} -c "{}" '.format(mn_user, MN_DAEMON + ''))
+        print(b2.stdout)
         print_warning("Masternode started reindexing...")
     else:
         print_warning("Error: Could not connect to daemon")
