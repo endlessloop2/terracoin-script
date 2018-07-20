@@ -30,7 +30,7 @@ SERVER_IP = urlopen('http://ip.42.pl/raw').read()
 DEFAULT_COLOR = "\x1b[0m"
 PRIVATE_KEY = ""
 
-COIN_VER = "v0.12.1.8"
+COIN_VER = "latest"
 
 def print_info(message):
     BLUE = '\033[94m'
